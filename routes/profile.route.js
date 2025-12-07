@@ -8,6 +8,7 @@ import {
   updateProfile,
   updateProfileRole,
 } from "../controller/profile.controller.js";
+import isAdmin from "../middleware/isAdmin.js";
 
 const profileRouter = express.Router();
 
@@ -21,10 +22,10 @@ profileRouter.get("/allProfile", getAllProfiles);
 
 profileRouter.get("/:id", authMiddleware, getProfileById);
 
-profileRouter.put("/:id", authMiddleware, updateProfile);
+profileRouter.put("/:id", authMiddleware, isAdmin, updateProfile);
 
-profileRouter.put("/role/:id", authMiddleware, updateProfileRole);
+profileRouter.put("/role/:id", authMiddleware, isAdmin, updateProfileRole);
 
-profileRouter.delete("/:id", authMiddleware, deleteProfile);
+profileRouter.delete("/:id", authMiddleware, isAdmin, deleteProfile);
 
 export default profileRouter;
