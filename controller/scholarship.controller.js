@@ -12,3 +12,16 @@ export const addScholarship = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const getScholarship = async (req, res) => {
+  try {
+    const scholarships = await Scholarship.find().sort({ createdAt: -1 });
+
+    res
+      .status(200)
+      .json({ message: "Scholarship found successfully", scholarships });
+  } catch (error) {
+    console.error("Get Scholarship error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
