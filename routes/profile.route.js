@@ -1,6 +1,7 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import {
+  deleteProfile,
   getAllProfiles,
   getProfileById,
   getUserProfile,
@@ -23,5 +24,7 @@ profileRouter.get("/:id", authMiddleware, getProfileById);
 profileRouter.put("/:id", authMiddleware, updateProfile);
 
 profileRouter.put("/role/:id", authMiddleware, updateProfileRole);
+
+profileRouter.delete("/:id", authMiddleware, deleteProfile);
 
 export default profileRouter;

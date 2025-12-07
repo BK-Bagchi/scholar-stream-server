@@ -24,7 +24,7 @@ export const getProfileById = async (req, res) => {
 
 export const getAllProfiles = async (req, res) => {
   try {
-    const profiles = await Profile.find();
+    const profiles = await Profile.find().sort({ createdAt: -1 });
 
     if (profiles.length === 0)
       return res.status(404).json({ message: "No profiles found" });
@@ -78,6 +78,19 @@ export const updateProfileRole = async (req, res) => {
     });
   } catch (error) {
     console.error("Update Profile Role error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const deleteProfile = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const profile = await Profile.findByIdAndDelete(id);
+
+    if (!profile) return res.status(404).json({ message: "Delete failed" });
+    res.status(200).json({ message: "Profile deleted successfully", profile });
+  } catch (error) {
+    console.error("Delete Profile error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
