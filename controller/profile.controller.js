@@ -1,4 +1,3 @@
-import Connection from "../models/connection.model.js";
 import Profile from "../models/profile.model.js";
 
 export const createProfile = async (req, res) => {
@@ -69,22 +68,6 @@ export const updateProfile = async (req, res) => {
     });
   } catch (error) {
     console.error("Update Profile error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
-
-export const deleteProfile = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const profile = await Profile.findByIdAndDelete(id);
-    const connection = await Connection.deleteMany({
-      $or: [{ profile: id }, { connected: id }],
-    });
-    if (!profile || !connection)
-      return res.status(404).json({ message: "Delete failed" });
-    res.status(200).json({ message: "Profile deleted successfully", profile });
-  } catch (error) {
-    console.error("Delete Profile error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
