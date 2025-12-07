@@ -57,3 +57,27 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const updateProfileRole = async (req, res) => {
+  const { id } = req.params;
+  const { role } = req.body;
+  try {
+    const updatedProfile = await Profile.findByIdAndUpdate(
+      id,
+      { role },
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedProfile)
+      return res.status(404).json({ message: "User not found" });
+    res.status(200).json({
+      message: "Profile role updated successfully",
+      profile: updatedProfile,
+    });
+  } catch (error) {
+    console.error("Update Profile Role error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

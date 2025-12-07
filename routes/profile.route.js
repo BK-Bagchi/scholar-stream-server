@@ -5,6 +5,7 @@ import {
   getProfileById,
   getUserProfile,
   updateProfile,
+  updateProfileRole,
 } from "../controller/profile.controller.js";
 
 const profileRouter = express.Router();
@@ -20,5 +21,7 @@ profileRouter.get("/allProfile", getAllProfiles);
 profileRouter.get("/:id", authMiddleware, getProfileById);
 
 profileRouter.put("/:id", authMiddleware, updateProfile);
+
+profileRouter.put("/role/:id", authMiddleware, updateProfileRole);
 
 export default profileRouter;
