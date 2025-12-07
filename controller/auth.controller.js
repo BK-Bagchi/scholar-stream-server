@@ -40,6 +40,7 @@ export const issueJWT = async (req, res) => {
         name: profile.name,
         email: profile.email,
         photoURL: profile.avatar,
+        role: profile.role,
       },
     });
   } catch (error) {
