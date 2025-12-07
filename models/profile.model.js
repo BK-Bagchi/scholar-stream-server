@@ -15,26 +15,10 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subject: String,
-    studyMode: {
+    role: {
       type: String,
-      enum: ["Online", "Offline"],
-    },
-    availabilityTime: String,
-    location: String,
-    experienceLevel: {
-      type: String,
-      enum: ["Beginner", "Intermediate", "Expert"],
-    },
-    rating: {
-      type: Number,
-      default: 0,
-      min: 0,
-      max: 5,
-    },
-    partnerCount: {
-      type: Number,
-      default: 0,
+      enum: ["student", "teacher", "admin"],
+      default: "student",
     },
   },
   {
