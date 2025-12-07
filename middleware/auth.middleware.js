@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import Profile from "../models/profile.model.js";
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -14,8 +15,14 @@ const authMiddleware = async (req, res, next) => {
     if (!decoded)
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
 
-    const { name, email } = decoded;
-    req.user = { name, email };
+    const { email: decodedEmail } = decoded;
+
+    const profile = await Profile.findOne({ email: decodedEmail });
+    if (!profile)
+      return res.status(401).json({ message: "Unauthorized: Invalid user" });
+
+    const { name, email, role } = profile;
+    req.user = { name, email, role };
 
     next();
   } catch (error) {
