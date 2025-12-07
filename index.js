@@ -6,6 +6,7 @@ import dbConnection from "./config/dbConnection.js";
 import errorHandler from "./middleware/errorHandler.middleware.js";
 import profileRouter from "./routes/profile.route.js";
 import authRouter from "./routes/auth.route.js";
+import scholarshipRouter from "./routes/scholarship.route.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
+app.use("/api/scholarship", scholarshipRouter);
 app.use(errorHandler);
 
 // ───────────────────── Database ───────────────────── //
