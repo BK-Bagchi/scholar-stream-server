@@ -1,28 +1,14 @@
 import Profile from "../models/profile.model.js";
 
-export const createProfile = async (req, res) => {
+export const getUserProfile = async (req, res) => {
+  const { email } = req.user;
   try {
-    //prettier-ignore
-    const { name, email, photoURL: avatar, subject, studyMode, availabilityTime, location, experienceLevel, rating, } = req.body;
+    const profile = await Profile.findOne({ email });
+    if (!profile) return res.status(404).json({ message: "User not found" });
 
-    if (!name || !email || !avatar)
-      return res
-        .status(400)
-        .json({ message: "Name, email, and avatar are required." });
-
-    //prettier-ignore
-    const profile = await Profile.create({ name, email, avatar, subject, studyMode, availabilityTime,  location, experienceLevel, rating });
-
-    if (!profile)
-      return res.status(500).json({ message: "Profile not created." });
-
-    res.status(201).json({
-      message: "Profile created successfully.",
-      profile,
-    });
+    res.status(200).json({ message: "Profile found successfully", profile });
   } catch (error) {
-    console.error("Create Profile error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.log("Get Profile error: ", error);
   }
 };
 export const getProfileById = async (req, res) => {

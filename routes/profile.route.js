@@ -1,9 +1,9 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import {
-  createProfile,
   getAllProfiles,
   getProfileById,
+  getUserProfile,
   updateProfile,
 } from "../controller/profile.controller.js";
 
@@ -13,7 +13,7 @@ profileRouter.get("/", (req, res) => {
   res.json({ message: "Profile route" });
 });
 
-profileRouter.post("/", authMiddleware, createProfile);
+profileRouter.get("/user", authMiddleware, getUserProfile);
 
 profileRouter.get("/allProfile", getAllProfiles);
 
