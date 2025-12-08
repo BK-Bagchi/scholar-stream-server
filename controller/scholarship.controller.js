@@ -4,6 +4,9 @@ export const addScholarship = async (req, res) => {
   try {
     const scholarship = await Scholarship.create(req.body);
 
+    if (!scholarship)
+      return res.status(404).json({ message: "Scholarship not created" });
+
     res
       .status(201)
       .json({ message: "Scholarship added successfully", scholarship });
@@ -16,6 +19,9 @@ export const addScholarship = async (req, res) => {
 export const getScholarship = async (req, res) => {
   try {
     const scholarships = await Scholarship.find().sort({ createdAt: -1 });
+
+    if (scholarships.length === 0)
+      return res.status(404).json({ message: "No scholarships found" });
 
     res
       .status(200)
