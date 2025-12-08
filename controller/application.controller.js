@@ -31,7 +31,7 @@ export const getAllApplications = async (req, res) => {
 export const getUserApplications = async (req, res) => {
   const { email } = req.user;
   try {
-    const applications = await Application.find({ email }).sort({
+    const applications = await Application.find({ userEmail: email }).sort({
       createdAt: -1,
     });
     if (applications.length === 0)
