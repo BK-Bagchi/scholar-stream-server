@@ -43,3 +43,34 @@ export const getUserReviews = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const updateReview = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedReview = await Review.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    if (!updatedReview)
+      return res.status(404).json({ message: "Review not found" });
+    res
+      .status(200)
+      .json({ message: "Review updated successfully", review: updatedReview });
+  } catch (error) {
+    console.error("Update Review error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const deleteReview = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const review = await Review.findByIdAndDelete(id);
+
+    if (!review) return res.status(404).json({ message: "Review not found" });
+    res.status(200).json({ message: "Review deleted successfully" });
+  } catch (error) {
+    console.error("Delete Review error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
