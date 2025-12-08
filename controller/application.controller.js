@@ -45,3 +45,56 @@ export const getUserApplications = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const updateApplication = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedApplication = await Application.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedApplication)
+      return res
+        .status(404)
+        .json({ message: "Application not found or not updated" });
+
+    res.status(200).json({
+      message: "Application updated successfully",
+      application: updatedApplication,
+    });
+  } catch (error) {
+    console.error("Update Application error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const updateApplicationStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  try {
+    const updatedApplication = await Application.findByIdAndUpdate(
+      id,
+      { applicationStatus: status },
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedApplication)
+      return res
+        .status(404)
+        .json({ message: "Application not found or not updated" });
+
+    res.status(200).json({
+      message: "Application status updated successfully",
+      application: updatedApplication,
+    });
+  } catch (error) {
+    console.error("Update Application Status error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

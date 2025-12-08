@@ -27,7 +27,7 @@ const applicationSchema = new mongoose.Schema(
     serviceCharge: Number,
     applicationStatus: {
       type: String,
-      enum: ["pending", "approved", "rejected"],
+      enum: ["pending", "processing", "approved", "rejected"],
       default: "pending",
     },
     paymentStatus: {

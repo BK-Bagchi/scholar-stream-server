@@ -4,6 +4,8 @@ import {
   getAllApplications,
   getUserApplications,
   postApplication,
+  updateApplication,
+  updateApplicationStatus,
 } from "../controller/application.controller.js";
 
 const applicationRouter = express.Router();
@@ -17,5 +19,10 @@ applicationRouter.post("/post", authMiddleware, postApplication);
 applicationRouter.get("/all", authMiddleware, getAllApplications);
 
 applicationRouter.get("/user", authMiddleware, getUserApplications);
+
+applicationRouter.put("/update/:id", authMiddleware, updateApplication);
+
+//prettier-ignore
+applicationRouter.patch("/update-status/:id", authMiddleware, updateApplicationStatus);
 
 export default applicationRouter;
