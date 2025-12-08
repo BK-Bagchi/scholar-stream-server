@@ -4,8 +4,9 @@ import cors from "cors";
 import morgan from "morgan";
 import dbConnection from "./config/dbConnection.js";
 import errorHandler from "./middleware/errorHandler.middleware.js";
-import profileRouter from "./routes/profile.route.js";
+import applicationRouter from "./routes/application.route.js";
 import authRouter from "./routes/auth.route.js";
+import profileRouter from "./routes/profile.route.js";
 import scholarshipRouter from "./routes/scholarship.route.js";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
   res.send(`🚀Study Mate project is running`);
 });
 
+app.use("/api/application", applicationRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/scholarship", scholarshipRouter);
