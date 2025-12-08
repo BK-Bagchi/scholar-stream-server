@@ -98,3 +98,16 @@ export const updateApplicationStatus = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const deleteApplication = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const application = await Application.findByIdAndDelete(id);
+
+    if (!application) return res.status(404).json({ message: "Delete failed" });
+    res.status(200).json({ message: "Application deleted successfully" });
+  } catch (error) {
+    console.error("Delete Application error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

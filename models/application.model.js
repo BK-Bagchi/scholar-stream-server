@@ -39,11 +39,7 @@ const applicationSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    feedback: [
-      {
-        message: String,
-      },
-    ],
+    feedback: String,
   },
   {
     timestamps: true,

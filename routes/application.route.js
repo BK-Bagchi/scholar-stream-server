@@ -1,6 +1,7 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import {
+  deleteApplication,
   getAllApplications,
   getUserApplications,
   postApplication,
@@ -24,5 +25,7 @@ applicationRouter.put("/update/:id", authMiddleware, updateApplication);
 
 //prettier-ignore
 applicationRouter.patch("/update-status/:id", authMiddleware, updateApplicationStatus);
+
+applicationRouter.delete("/delete/:id", authMiddleware, deleteApplication);
 
 export default applicationRouter;
