@@ -27,3 +27,21 @@ export const getAllApplications = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const getUserApplications = async (req, res) => {
+  const { email } = req.user;
+  try {
+    const applications = await Application.find({ email }).sort({
+      createdAt: -1,
+    });
+    if (applications.length === 0)
+      return res.status(404).json({ message: "No applications found" });
+
+    res
+      .status(200)
+      .json({ message: "Applications found successfully", applications });
+  } catch (error) {
+    console.error("Get User Applications error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

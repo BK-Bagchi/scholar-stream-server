@@ -2,6 +2,7 @@ import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import {
   getAllApplications,
+  getUserApplications,
   postApplication,
 } from "../controller/application.controller.js";
 
@@ -14,5 +15,7 @@ applicationRouter.get("/", (req, res) => {
 applicationRouter.post("/post", authMiddleware, postApplication);
 
 applicationRouter.get("/all", authMiddleware, getAllApplications);
+
+applicationRouter.get("/user", authMiddleware, getUserApplications);
 
 export default applicationRouter;
