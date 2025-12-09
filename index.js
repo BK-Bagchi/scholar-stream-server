@@ -6,6 +6,7 @@ import dbConnection from "./config/dbConnection.js";
 import errorHandler from "./middleware/errorHandler.middleware.js";
 import applicationRouter from "./routes/application.route.js";
 import authRouter from "./routes/auth.route.js";
+import paymentRouter from "./routes/payment.route.js";
 import profileRouter from "./routes/profile.route.js";
 import reviewRouter from "./routes/review.route.js";
 import scholarshipRouter from "./routes/scholarship.route.js";
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/application", applicationRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/payment", paymentRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/review", reviewRouter);
 app.use("/api/scholarship", scholarshipRouter);
