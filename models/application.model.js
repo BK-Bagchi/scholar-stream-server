@@ -40,6 +40,14 @@ const applicationSchema = new mongoose.Schema(
       default: Date.now,
     },
     feedback: String,
+    payment: {
+      stripeSessionId: String,
+      stripePaymentIntentId: String,
+      stripePaymentStatus: String,
+      amount: Number,
+      currency: String,
+      receipt_url: String,
+    },
   },
   {
     timestamps: true,

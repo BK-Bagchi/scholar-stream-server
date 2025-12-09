@@ -21,8 +21,8 @@ const authMiddleware = async (req, res, next) => {
     if (!profile)
       return res.status(401).json({ message: "Unauthorized: Invalid user" });
 
-    const { name, email, role } = profile;
-    req.user = { name, email, role };
+    const { _id, name, email, role } = profile;
+    req.user = { _id, name, email, role };
 
     next();
   } catch (error) {
