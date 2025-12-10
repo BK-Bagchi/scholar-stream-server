@@ -31,9 +31,11 @@ export const getAllApplications = async (req, res) => {
 export const getUserApplications = async (req, res) => {
   const { email } = req.user;
   try {
-    const applications = await Application.find({ userEmail: email }).sort({
-      createdAt: -1,
-    });
+    const applications = await Application.find({ userEmail: email })
+      .populate("scholarshipId")
+      .sort({
+        createdAt: -1,
+      });
     if (applications.length === 0)
       return res.status(404).json({ message: "No applications found" });
 

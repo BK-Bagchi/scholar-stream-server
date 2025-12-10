@@ -16,7 +16,7 @@ export const addScholarship = async (req, res) => {
   }
 };
 
-export const getScholarship = async (req, res) => {
+export const getAllScholarship = async (req, res) => {
   try {
     const scholarships = await Scholarship.find().sort({ createdAt: -1 });
 

@@ -2,7 +2,7 @@ import express from "express";
 import {
   addScholarship,
   deleteScholarship,
-  getScholarship,
+  getAllScholarship,
   updateScholarship,
 } from "../controller/scholarship.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
@@ -16,7 +16,7 @@ scholarshipRouter.get("/", (req, res) => {
 
 scholarshipRouter.post("/add", authMiddleware, isAdmin, addScholarship);
 
-scholarshipRouter.get("/get", authMiddleware, getScholarship);
+scholarshipRouter.get("/get", authMiddleware, getAllScholarship);
 
 // prettier-ignore
 scholarshipRouter.put("/update/:id", authMiddleware, isAdmin, updateScholarship);
