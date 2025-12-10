@@ -23,6 +23,7 @@ const applicationSchema = new mongoose.Schema(
       type: String,
       enum: ["Diploma", "Bachelor", "Masters", "PhD"],
     },
+    tuitionFees: Number,
     applicationFees: Number,
     serviceCharge: Number,
     applicationStatus: {

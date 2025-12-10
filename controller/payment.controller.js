@@ -14,7 +14,6 @@ export const createSession = async (req, res) => {
   const { applicationFees, tuitionFees, serviceCharge } = scholarship;
   const amount =
     Number(applicationFees) + Number(tuitionFees) + Number(serviceCharge);
-  const amountInCents = amount * 100;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -27,7 +26,7 @@ export const createSession = async (req, res) => {
             product_data: {
               name: `Scholarship Application - ${scholarshipId}`,
             },
-            unit_amount: amountInCents,
+            unit_amount: amount * 100,
           },
           quantity: 1,
         },
@@ -37,7 +36,7 @@ export const createSession = async (req, res) => {
     });
 
     const payment = {
-      amount: amountInCents,
+      amount: amount,
       currency,
       stripeSessionId: session.id, // 🔥 Save session ID here
       stripePaymentStatus: "unpaid", // initial
