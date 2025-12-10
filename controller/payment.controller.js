@@ -44,7 +44,17 @@ export const createSession = async (req, res) => {
     };
 
     req.body.payment = payment;
-    await Application.create(req.body);
+    let application = await Application.findOne({
+      scholarshipId,
+      userId: req.user._id,
+    });
+
+    if (application) {
+      application.payment = payment;
+      await application.save();
+    } else {
+      application = await Application.create(req.body);
+    }
 
     res.json({ url: session.url });
   } catch (err) {
