@@ -15,7 +15,9 @@ export const addReview = async (req, res) => {
 
 export const getReviews = async (req, res) => {
   try {
-    const reviews = await Review.find().sort({ createdAt: -1 });
+    const reviews = await Review.find()
+      .populate("scholarshipId")
+      .sort({ createdAt: -1 });
 
     if (reviews.length === 0)
       return res.status(404).json({ message: "No reviews found" });
@@ -30,9 +32,11 @@ export const getReviews = async (req, res) => {
 export const getUserReviews = async (req, res) => {
   const { email } = req.user;
   try {
-    const reviews = await Review.find({ userEmail: email }).sort({
-      createdAt: -1,
-    });
+    const reviews = await Review.find({ userEmail: email })
+      .populate("scholarshipId")
+      .sort({
+        createdAt: -1,
+      });
 
     if (reviews.length === 0)
       return res.status(404).json({ message: "No reviews found" });
