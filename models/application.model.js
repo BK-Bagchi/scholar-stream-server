@@ -43,7 +43,11 @@ const applicationSchema = new mongoose.Schema(
     payment: {
       stripeSessionId: String,
       stripePaymentIntentId: String,
-      stripePaymentStatus: String,
+      stripePaymentStatus: {
+        type: String,
+        enum: ["unpaid", "paid"],
+        default: "unpaid",
+      },
       amount: Number,
       currency: String,
       receipt_url: String,
