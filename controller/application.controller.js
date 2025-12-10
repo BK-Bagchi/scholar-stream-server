@@ -1,4 +1,6 @@
 import Application from "../models/application.model.js";
+import Profile from "../models/profile.model.js";
+import Scholarship from "../models/scholarship.model.js";
 
 export const postApplication = async (req, res) => {
   try {
@@ -24,6 +26,24 @@ export const getAllApplications = async (req, res) => {
       .json({ message: "Applications found successfully", applications });
   } catch (error) {
     console.error("Get Applications error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const getAnalytics = async (req, res) => {
+  try {
+    const users = await Profile.find();
+    const scholarships = await Scholarship.find();
+    const applications = await Application.find();
+
+    res.status(200).json({
+      message: "Analytics found successfully",
+      users,
+      scholarships,
+      applications,
+    });
+  } catch (error) {
+    console.error("Get Analytics error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

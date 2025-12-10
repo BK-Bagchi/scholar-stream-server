@@ -3,6 +3,7 @@ import authMiddleware from "../middleware/auth.middleware.js";
 import {
   deleteApplication,
   getAllApplications,
+  getAnalytics,
   getUserApplications,
   postApplication,
   updateApplication,
@@ -18,6 +19,8 @@ applicationRouter.get("/", (req, res) => {
 applicationRouter.post("/post", authMiddleware, postApplication);
 
 applicationRouter.get("/all", authMiddleware, getAllApplications);
+
+applicationRouter.get("/analytics", authMiddleware, getAnalytics);
 
 applicationRouter.get("/user", authMiddleware, getUserApplications);
 
