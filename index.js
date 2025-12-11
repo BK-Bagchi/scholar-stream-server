@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false })); //accepts client submitted for
 
 // ───────────────────── Routes ───────────────────── //
 app.get("/", (req, res) => {
-  res.send(`🚀Scholar Stream project is running`);
+  res.redirect(process.env.FRONTEND_URL);
 });
 
 app.use("/api/application", applicationRouter);
