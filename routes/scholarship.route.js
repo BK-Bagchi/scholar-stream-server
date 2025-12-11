@@ -16,7 +16,7 @@ scholarshipRouter.get("/", (req, res) => {
 
 scholarshipRouter.post("/add", authMiddleware, isAdmin, addScholarship);
 
-scholarshipRouter.get("/get", authMiddleware, getAllScholarship);
+scholarshipRouter.get("/get", getAllScholarship);
 
 // prettier-ignore
 scholarshipRouter.put("/update/:id", authMiddleware, isAdmin, updateScholarship);
