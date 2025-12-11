@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false })); //accepts client submitted for
 
 // ───────────────────── Routes ───────────────────── //
 app.get("/", (req, res) => {
-  res.send(`🚀Study Mate project is running`);
+  res.send(`🚀Scholar Stream project is running`);
 });
 
 app.use("/api/application", applicationRouter);
